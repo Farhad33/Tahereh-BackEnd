@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express.Router();
-const fs = require('fs')
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const upload = multer({ dest: 'uploads' })
+const renamePhoto = require('../util/rename')
 const db = require('../database')
 
 
@@ -17,17 +17,16 @@ app.post('/signup', (req, res) => {
     })
 })
 
-app.get('/collection', (req, res) => {
+
+app.get('/collections', (req, res) => {
     db.getAllCollections()
     .then(result => {
         res.send(result)
     })
 })
 
-app.post('/collection', upload.single('avatar'), (req, res) => {
-    console.log("req.file", req.file);
-    // fs.writeFileSync('11.jpg', photo);
-    res.send({result: 'bla bla'})
+app.put('/collections', upload.single('photo'), (req, res) => {
+    renamePhoto(req, res, 'collections')
 })
 
 module.exports = app;

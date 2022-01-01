@@ -2,21 +2,17 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-// const cors = require('cors')
+const path = require('path')
+global.appRoot = path.resolve(__dirname);
 const routes = require('./route')
 const port = 4001
-// const corsOptions = {
-//   origin: 'http://localhost:3000/',
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
 
 app.use(morgan('tiny'))
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true }))
 app.use(bodyParser.json({limit: '50mb', extended: true}))
+app.use("/public", express.static(path.join(__dirname, 'public')));
 
-// app.use(express.json()) // for parsing application/json
-// app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-// app.use(cors(corsOptions))
+
 
 app.use(function (req, res, next) {
     

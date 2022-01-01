@@ -27,7 +27,7 @@ CREATE TABLE product (
 
 INSERT INTO collection (name, photo_src, photo_alt)
 VALUES
-('Women dresses', 'http://localhost:3000/large/16.png', 'Women dresses'),
-('Women casual', 'http://localhost:3000/large/17.png', 'Women casual'),
-('Winter Clothing', 'http://localhost:3000/large/18.png', 'Winter Clothing'),
-('Girl dresses', 'http://localhost:3000/large/19.png', 'Girl dresses');
+('Women dresses', 'http://localhost:3000/large/16.png', ''),
+('Women casual', 'http://localhost:3000/large/17.png', ''),
+('Winter Clothing', 'http://localhost:3000/large/18.png', ''),
+('Girl dresses', 'http://localhost:3000/large/19.png', '');

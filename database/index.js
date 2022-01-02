@@ -1,6 +1,13 @@
 const pgp = require('pg-promise')()
-const db = pgp({ database: 'clothes-shop' })
-
+const db = pgp({ 
+    host: 'ec2-54-83-157-174.compute-1.amazonaws.com',
+    port: 5432,
+    database: 'danpf3k5e1grrp',
+    user: 'vwzhygayfvbsfa',
+    password: '776ee612bb6417a85fa5df21ad8c841397fe00c5a50e36e4dc7c61588f1cc568',
+    ssl: { rejectUnauthorized: false },
+    query_timeout: 5000
+})
 
 module.exports = {
     signup({ first_name, last_name, email, password }) {

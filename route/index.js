@@ -21,7 +21,22 @@ app.post('/signup', (req, res) => {
 app.get('/collections', (req, res) => {
     db.getAllCollections()
     .then(result => {
+        console.log('result => ', result)
         res.send(result)
+    })
+    .catch(err => {
+        console.log('err => ', err)
+        res.send(err)
+    })
+})
+
+app.get('/collections/:id', (req, res) => {
+    db.getProductsCollection(req.params.id)
+    .then(result => {
+        res.send(result)
+    })
+    .catch(err => {
+        res.send(err)
     })
 })
 

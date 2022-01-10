@@ -10,6 +10,16 @@ const db = pgp({
 })
 
 module.exports = {
+    getProductsCollection(id) {
+        const sql = `
+            SELECT
+                *
+            FROM
+                product
+            WHERE $1 = collection_id
+        `
+        return db.any(sql, [id])
+    },
     signup({ first_name, last_name, email, password }) {
         const sql = `
             INSERT INTO

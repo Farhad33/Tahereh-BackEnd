@@ -22,12 +22,30 @@ CREATE TABLE product (
     name VARCHAR(255),
     description VARCHAR(255),
     photo_src VARCHAR(255),
-    photo_alt VARCHAR(255)
+    photo_alt VARCHAR(255),
+    collection_id INTEGER
 );
 
-INSERT INTO collection (name, photo_src, photo_alt)
+INSERT INTO collection (id, name, photo_src, photo_alt)
 VALUES
-('Women dresses', 'http://localhost:3000/large/16.png', ''),
-('Women casual', 'http://localhost:3000/large/17.png', ''),
-('Winter Clothing', 'http://localhost:3000/large/18.png', ''),
-('Girl dresses', 'http://localhost:3000/large/19.png', '');
+(1, 'Women dresses', 'collections/16.png', 'Women dresses'),
+(2, 'Women casual', 'collections/17.png', 'Women casual'),
+(3, 'Winter Clothing', 'collections/18.png', 'Winter Clothing'),
+(4, 'Girl dresses', 'collections/19.png', 'Girl dresses');
+
+
+INSERT INTO product (name, description, photo_src, photo_alt, collection_id)
+VALUES
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 1 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 1 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 1 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 1 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 1 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 1 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 2 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 2 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 2 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 2 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 2 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 2 ),
+('white chiffon dress', 'some description', 'product/11.png', 'white chiffon dress', 2 );

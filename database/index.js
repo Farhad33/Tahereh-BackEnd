@@ -1,5 +1,5 @@
 const pgp = require('pg-promise')()
-const db = pgp({ 
+const db = pgp({
     host: 'ec2-54-83-157-174.compute-1.amazonaws.com',
     port: 5432,
     database: 'danpf3k5e1grrp',
@@ -29,7 +29,7 @@ module.exports = {
             RETURNING
                 *
         `
-        return db.one(sql, [ first_name, last_name, email, password ])
+        return db.one(sql, [first_name, last_name, email, password])
     },
 
     getAllCollections() {

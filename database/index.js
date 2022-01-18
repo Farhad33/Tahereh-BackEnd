@@ -20,6 +20,16 @@ module.exports = {
         `
         return db.any(sql, [id])
     },
+    getProductsById(id) {
+        const sql = `
+            SELECT
+                *
+            FROM
+                product
+            WHERE $1 = id
+        `
+        return db.oneOrNone(sql, [id])
+    },
     signup({ first_name, last_name, email, password }) {
         const sql = `
             INSERT INTO

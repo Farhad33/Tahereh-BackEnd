@@ -40,6 +40,16 @@ app.get('/collections/:id', (req, res) => {
         })
 })
 
+app.get('/products/:id', (req, res) => {
+    db.getProductsById(req.params.id)
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => {
+            res.send(err)
+        })
+})
+
 app.put('/collections', upload.single('photo'), (req, res) => {
     renamePhoto(req, res, 'collections')
 })

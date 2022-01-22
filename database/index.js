@@ -20,6 +20,16 @@ module.exports = {
         `
         return db.any(sql, [id])
     },
+    getProductsIdCollection(id) {
+        const sql = `
+            SELECT
+                id
+            FROM
+                product
+            WHERE $1 = collection_id
+        `
+        return db.any(sql, [id])
+    },
     getProductsById(id) {
         const sql = `
             SELECT

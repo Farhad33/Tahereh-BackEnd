@@ -40,7 +40,7 @@ app.get('/collections/:id', (req, res) => {
         })
 })
 
-app.get('products_id_collection/:id', (req, res) => {
+app.get('/products_id_collection/:id', (req, res) => {
     db.getProductsIdCollection(req.params.id)
         .then(result => {
             res.send(result)

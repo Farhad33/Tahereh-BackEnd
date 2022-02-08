@@ -31,6 +31,16 @@ app.get('/collections', (req, res) => {
 })
 
 app.get('/collections/:id', (req, res) => {
+    db.getCollectionById(req.params.id)
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => {
+            res.send(err)
+        })
+})
+
+app.get('/collections/:id/products', (req, res) => {
     db.getProductsCollection(req.params.id)
         .then(result => {
             res.send(result)

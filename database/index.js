@@ -62,6 +62,20 @@ module.exports = {
         return db.any(sql)
     },
 
+    getCollectionById(id) {
+        const sql = `
+            SELECT
+                *
+            FROM 
+                collection
+            WHERE
+                id = $1
+        `
+        return db.oneOrNone(sql, [id])
+    },
+
+
+
     editCollection(name, photo_alt, photo_src, id) {
         const sql = `
             UPDATE

@@ -1,5 +1,5 @@
 const pgp = require('pg-promise')()
-const db = pgp({ 
+const db = pgp({
     host: 'ec2-54-83-157-174.compute-1.amazonaws.com',
     port: 5432,
     database: 'danpf3k5e1grrp',
@@ -20,6 +20,26 @@ module.exports = {
         `
         return db.any(sql, [id])
     },
+    getProductsIdCollection(id) {
+        const sql = `
+            SELECT
+                id
+            FROM
+                product
+            WHERE $1 = collection_id
+        `
+        return db.any(sql, [id])
+    },
+    getProductsById(id) {
+        const sql = `
+            SELECT
+                *
+            FROM
+                product
+            WHERE $1 = id
+        `
+        return db.oneOrNone(sql, [id])
+    },
     signup({ first_name, last_name, email, password }) {
         const sql = `
             INSERT INTO
@@ -29,7 +49,7 @@ module.exports = {
             RETURNING
                 *
         `
-        return db.one(sql, [ first_name, last_name, email, password ])
+        return db.one(sql, [first_name, last_name, email, password])
     },
 
     getAllCollections() {
@@ -41,6 +61,20 @@ module.exports = {
         `
         return db.any(sql)
     },
+
+    getCollectionById(id) {
+        const sql = `
+            SELECT
+                *
+            FROM 
+                collection
+            WHERE
+                id = $1
+        `
+        return db.oneOrNone(sql, [id])
+    },
+
+
 
     editCollection(name, photo_alt, photo_src, id) {
         const sql = `

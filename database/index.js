@@ -90,5 +90,16 @@ module.exports = {
                 *
         `
         return db.one(sql, [name, photo_alt, photo_src, id])
+    },
+    getAboutMe() {
+        const sql = `
+            SELECT
+                *
+            FROM
+                product
+            WHERE id = 0
+        `
+        return db.any(sql)
     }
+
 }

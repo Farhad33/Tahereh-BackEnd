@@ -50,6 +50,16 @@ app.get('/collections/:id/products', (req, res) => {
         })
 })
 
+app.get('/aboutme', (req, res) => {
+    db.getAboutMe()
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => {
+            res.send(err)
+        })
+})
+
 // app.get('/products_id_collection/:id', (req, res) => {
 //     db.getProductsIdCollection(req.params.id)
 //         .then(result => {

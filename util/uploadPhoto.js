@@ -4,7 +4,6 @@ const db = require('../database')
 
 async function uploadPhoto(req, res, dirctory) {
   const { name, photo_alt, description, id } = req.body
-  console.log('req.body => ', req.body)
   if (req.file) {
     const newPath = path.join(global.appRoot, `./public/${dirctory}/${req.file.originalname}`);
     const oldPath = path.join(global.appRoot, req.file.path);

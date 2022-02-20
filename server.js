@@ -17,7 +17,6 @@ app.use("/public", express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
     
   if (req.method === 'OPTIONS') {
-      console.log('!OPTIONS');
       var headers = {};
       // IE8 does not allow domains to be specified, just the *
       // headers["Access-Control-Allow-Origin"] = req.headers.origin;

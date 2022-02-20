@@ -11,7 +11,6 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/signup', (req, res) => {
-    console.log('req.body => ', req.body)
     db.signup(req.body)
         .then(result => {
             res.send(result)
@@ -25,7 +24,6 @@ app.get('/collections', (req, res) => {
             res.send(result)
         })
         .catch(err => {
-            console.log('err => ', err)
             res.send(err)
         })
 })

@@ -100,6 +100,22 @@ module.exports = {
             WHERE id = 0
         `
         return db.one(sql)
-    }
+    },
+    editAboutMe(name, photo_alt, photo_src, id = 0) {
+        const sql = `
+            UPDATE
+                product
+            SET
+                name = $1,
+                photo_alt = $2,
+                photo_src = $3
+            WHERE
+                id = $4
+            RETURNING
+                *
+        `
+        return db.one(sql, [name, photo_alt, photo_src, id])
+    },
+
 
 }

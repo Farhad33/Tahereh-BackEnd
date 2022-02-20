@@ -21,7 +21,6 @@ app.post('/signup', (req, res) => {
 app.get('/collections', (req, res) => {
     db.getAllCollections()
         .then(result => {
-            console.log('result => ', result)
             res.send(result)
         })
         .catch(err => {
@@ -60,16 +59,6 @@ app.get('/aboutme', (req, res) => {
         })
 })
 
-// app.get('/products_id_collection/:id', (req, res) => {
-//     db.getProductsIdCollection(req.params.id)
-//         .then(result => {
-//             res.send(result)
-//         })
-//         .catch(err => {
-//             res.send(err)
-//         })
-// })
-
 app.get('/products/:id', (req, res) => {
     db.getProductsById(req.params.id)
         .then(result => {
@@ -80,7 +69,7 @@ app.get('/products/:id', (req, res) => {
         })
 })
 
-app.put('/collections', upload.single('photo'), (req, res) => {
+app.put('/aboutme', upload.single('photo'), (req, res) => {
     renamePhoto(req, res, 'collections')
 })
 

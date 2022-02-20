@@ -3,6 +3,8 @@ const path = require('path')
 const db = require('../database')
 
 async function uploadPhoto(req, res, dirctory) {
+  const { name, photo_alt, description, id } = req.body
+  console.log('req.body => ', req.body)
   if (req.file) {
     const newPath = path.join(global.appRoot, `./public/${dirctory}/${req.file.originalname}`);
     const oldPath = path.join(global.appRoot, req.file.path);
@@ -11,9 +13,8 @@ async function uploadPhoto(req, res, dirctory) {
         if (err) {
           res.send({ status: 500, message: "Oops! Something went wrong!!", err })
         } else {
-          const { name, photo_alt, description } = req.body
           const photo_src = `${dirctory}/${req.file.originalname}`
-          db.editAboutMe(name, photo_alt, photo_src, description)
+          db.editProduct(name, photo_alt, photo_src, description, id)
             .then(result => {
               res.send({ status: 200, message: "Photo was uploaded.", result })
             })
@@ -32,8 +33,7 @@ async function uploadPhoto(req, res, dirctory) {
       })
     }
   } else {
-    const { name, photo_alt, description } = req.body
-    db.editAboutMe(name, photo_alt, false, description)
+    db.editProduct(name, photo_alt, false, description, id)
     .then(result => {
       res.send({ status: 200, message: "Photo was uploaded.", result })
     })

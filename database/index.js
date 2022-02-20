@@ -16,7 +16,8 @@ module.exports = {
                 *
             FROM
                 product
-            WHERE $1 = collection_id
+            WHERE 
+                collection_id = $1
         `
         return db.any(sql, [id])
     },
@@ -40,16 +41,16 @@ module.exports = {
         `
         return db.oneOrNone(sql, [id])
     },
-    signup({ first_name, last_name, email, password }) {
+    signup({ email, password }) {
         const sql = `
             INSERT INTO
-                users(first_name, last_name, email, password)
+                users(email, password)
             VALUES
-                ($1, $2, $3, $4)
+                ($1, $2)
             RETURNING
                 *
         `
-        return db.one(sql, [first_name, last_name, email, password])
+        return db.one(sql, [email, password])
     },
 
     getAllCollections() {
@@ -57,7 +58,9 @@ module.exports = {
             SELECT
                 *
             FROM 
-                collection
+                product
+            WHERE
+                is_collection = true
         `
         return db.any(sql)
     },
@@ -74,23 +77,6 @@ module.exports = {
         return db.oneOrNone(sql, [id])
     },
 
-
-
-    editCollection(name, photo_alt, photo_src, id) {
-        const sql = `
-            UPDATE
-                collection
-            SET
-                name = $1,
-                photo_alt = $2,
-                photo_src = $3
-            WHERE
-                id = $4
-            RETURNING
-                *
-        `
-        return db.one(sql, [name, photo_alt, photo_src, id])
-    },
     getAboutMe() {
         const sql = `
             SELECT
@@ -101,7 +87,7 @@ module.exports = {
         `
         return db.one(sql)
     },
-    editAboutMe(name, photo_alt, photo_src, description) {
+    editProduct(name, photo_alt, photo_src, description, id) {
         if (photo_src) {
             const sql = `
                 UPDATE
@@ -112,11 +98,11 @@ module.exports = {
                     photo_src = $3,
                     description = $4
                 WHERE
-                    id = 0
+                    id = $5
                 RETURNING
                     *
             `
-            return db.one(sql, [name, photo_alt, photo_src, description])
+            return db.one(sql, [name, photo_alt, photo_src, description, id])
         } else {
             const sql = `
                 UPDATE
@@ -126,11 +112,11 @@ module.exports = {
                     photo_alt = $2,
                     description = $3
                 WHERE
-                    id = 0
+                    id = $4
                 RETURNING
                     *
             `
-            return db.one(sql, [name, photo_alt, description])
+            return db.one(sql, [name, photo_alt, description, id])
             
         }
     },

@@ -6,11 +6,12 @@ const uploadPhoto = require('../util/uploadPhoto')
 const db = require('../database')
 
 
-app.get('/majid', (req, res) => {
+app.get('/login', (req, res) => {
     res.send({ id: 1, name: 'Majid!' })
 })
 
 app.post('/signup', (req, res) => {
+    console.log('req.body => ', req.body)
     db.signup(req.body)
         .then(result => {
             res.send(result)
@@ -37,6 +38,12 @@ app.get('/collections/:id', (req, res) => {
         .catch(err => {
             res.send(err)
         })
+})
+
+app.put('/collections/:id', upload.single('photo'), (req, res) => {
+    const id = req.params.id
+    req.body.id = id
+    uploadPhoto(req, res, 'aboutme')
 })
 
 app.get('/collections/:id/products', (req, res) => {

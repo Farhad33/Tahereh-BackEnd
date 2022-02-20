@@ -78,4 +78,11 @@ app.put('/aboutme', upload.single('photo'), (req, res) => {
     uploadPhoto(req, res, 'aboutme')
 })
 
+app.put('/collections/:id/products/:id', upload.single('photo'), (req, res) => {
+    const id = req.params.id
+    console.log('req.params => ', req.params)
+    req.body.id = id
+    uploadPhoto(req, res, 'product')
+})
+
 module.exports = app;

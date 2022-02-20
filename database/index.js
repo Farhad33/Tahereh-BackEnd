@@ -70,7 +70,7 @@ module.exports = {
             SELECT
                 *
             FROM 
-                collection
+                product
             WHERE
                 id = $1
         `

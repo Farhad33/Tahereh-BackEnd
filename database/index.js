@@ -99,7 +99,7 @@ module.exports = {
                 product
             WHERE id = 0
         `
-        return db.any(sql)
+        return db.one(sql)
     }
 
 }

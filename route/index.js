@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express.Router();
 const multer = require('multer')
-const upload = multer({ dest: 'uploads' })
-const renamePhoto = require('../util/rename')
+const upload = multer({ dest: 'uploads/' })
+const uploadPhoto = require('../util/uploadPhoto')
 const db = require('../database')
 
 
@@ -70,7 +70,7 @@ app.get('/products/:id', (req, res) => {
 })
 
 app.put('/aboutme', upload.single('photo'), (req, res) => {
-    renamePhoto(req, res, 'collections')
+    uploadPhoto(req, res, 'aboutme')
 })
 
 module.exports = app;

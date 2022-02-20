@@ -101,20 +101,38 @@ module.exports = {
         `
         return db.one(sql)
     },
-    editAboutMe(name, photo_alt, photo_src, id = 0) {
-        const sql = `
-            UPDATE
-                product
-            SET
-                name = $1,
-                photo_alt = $2,
-                photo_src = $3
-            WHERE
-                id = $4
-            RETURNING
-                *
-        `
-        return db.one(sql, [name, photo_alt, photo_src, id])
+    editAboutMe(name, photo_alt, photo_src, description) {
+        if (photo_src) {
+            const sql = `
+                UPDATE
+                    product
+                SET
+                    name = $1,
+                    photo_alt = $2,
+                    photo_src = $3,
+                    description = $4
+                WHERE
+                    id = 0
+                RETURNING
+                    *
+            `
+            return db.one(sql, [name, photo_alt, photo_src, description])
+        } else {
+            const sql = `
+                UPDATE
+                    product
+                SET
+                    name = $1,
+                    photo_alt = $2,
+                    description = $3
+                WHERE
+                    id = 0
+                RETURNING
+                    *
+            `
+            return db.one(sql, [name, photo_alt, description])
+            
+        }
     },
 
 

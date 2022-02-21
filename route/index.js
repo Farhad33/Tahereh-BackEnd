@@ -4,6 +4,7 @@ const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const uploadPhoto = require('../util/uploadPhoto')
 const db = require('../database')
+const jwt = require('jsonwebtoken');
 
 
 app.post('/signin', (req, res) => {
@@ -12,7 +13,8 @@ app.post('/signin', (req, res) => {
     .then(result => {
         if (result.length === 1) {
             if (result[0].password === password) {
-                res.send({status: 200, message: "You have succesfully logged in"})    
+                const token = jwt.sign({id: result[0].id, email}, 'secret', { expiresIn: '1h' })
+                res.send({status: 200, message: "You have succesfully logged in!", token})
             } else {
                 res.send({status: 404, message: "We cound't login"})
             }
@@ -21,7 +23,7 @@ app.post('/signin', (req, res) => {
         }
     })
     .catch(err => {
-        res.send({message: 'something went wrong!'})
+        res.send({message: 'something went wrong!', err})
     })
 })
 

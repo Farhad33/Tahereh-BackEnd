@@ -41,7 +41,8 @@ module.exports = {
         `
         return db.oneOrNone(sql, [id])
     },
-    signup({ email, password }) {
+
+    createUser({ email, password }) {
         const sql = `
             INSERT INTO
                 users(email, password)
@@ -51,6 +52,19 @@ module.exports = {
                 *
         `
         return db.one(sql, [email, password])
+    },
+
+    findUserByEmail(email) {
+        console.log('email => ', email)
+        const sql = `
+            SELECT
+                *
+            FROM 
+                users
+            WHERE
+                email = $1
+        `
+        return db.any(sql, [email])
     },
 
     getAllCollections() {

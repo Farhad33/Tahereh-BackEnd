@@ -6,14 +6,32 @@ const uploadPhoto = require('../util/uploadPhoto')
 const db = require('../database')
 
 
-app.get('/login', (req, res) => {
-    res.send({ id: 1, name: 'Majid!' })
+app.post('/signin', (req, res) => {
+    const { email, password } = req.body
+    db.findUserByEmail(email)
+    .then(result => {
+        if (result.length === 1) {
+            if (result[0].password === password) {
+                res.send({status: 200, message: "You have succesfully logged in"})    
+            } else {
+                res.send({status: 404, message: "We cound't login"})
+            }
+        } else {
+            res.send({status: 404, message: "We cound't login"})
+        }
+    })
+    .catch(err => {
+        res.send({message: 'something went wrong!'})
+    })
 })
 
 app.post('/signup', (req, res) => {
-    db.signup(req.body)
+    db.createUser(req.body)
         .then(result => {
             res.send(result)
+        })
+        .catch(err => {
+            res.send({message: err.detail})
         })
 })
 

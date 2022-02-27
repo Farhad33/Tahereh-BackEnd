@@ -19,7 +19,8 @@ CREATE TABLE product (
 
 INSERT INTO product (id, name, description, photo_src, photo_alt, is_collection)
 VALUES
-(0, 'TAHEREH', 'For over 12 years, Tahereh Najafi has been a noteworthy sewing teacher in private institutions. You may know her work as the sewing teacher and dressmaker but she’s also credited with Ministry of Culture organization. Tahereh has been honored with many prizes at the Fashion Festival in Iran. She holds bachelor degree in fashion design.', 'aboutme/tahereh.jpg', 'Tahereh', false);
+(0, 'TAHEREH', 'For over 12 years, Tahereh Najafi has been a noteworthy sewing teacher in private institutions. You may know her work as the sewing teacher and dressmaker but she’s also credited with Ministry of Culture organization. Tahereh has been honored with many prizes at the Fashion Festival in Iran. She holds bachelor degree in fashion design.', 'aboutme/tahereh.jpg', 'Tahereh', false),
+(-1, 'TAHEREH', 'For over 12 years, Tahereh Najafi has been a noteworthy sewing teacher in private institutions. You may know her work as the sewing teacher and dressmaker but she’s also credited with Ministry of Culture organization. Tahereh has been honored with many prizes at the Fashion Festival in Iran. She holds bachelor degree in fashion design.', 'aboutme/tahereh.jpg', 'Tahereh', false);
 
 INSERT INTO product (name, photo_src, photo_alt, is_collection)
 VALUES

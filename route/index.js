@@ -1,30 +1,31 @@
 const express = require('express');
 const app = express.Router();
-const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
-const uploadPhoto = require('../util/uploadPhoto')
-const db = require('../database')
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const uploadPhoto = require('../util/uploadPhoto');
+const db = require('../database');
 const jwt = require('jsonwebtoken');
 
 
 app.post('/signin', (req, res) => {
     const { email, password } = req.body
     db.findUserByEmail(email)
-    .then(result => {
-        if (result.length === 1) {
-            if (result[0].password === password) {
-                const token = jwt.sign({id: result[0].id, email}, 'secret', { expiresIn: '1h' })
-                res.send({status: 200, message: "You have succesfully logged in!", token})
+        .then(result => {
+            if (result.length === 1) {
+                if (result[0].password === password) {
+                    // سوال: خط پایین
+                    const token = jwt.sign({ id: result[0].id, email }, 'secret', { expiresIn: '1h' })
+                    res.send({ status: 200, message: "You have succesfully logged in!", token })
+                } else {
+                    res.send({ status: 404, message: "We cound't login" })
+                }
             } else {
-                res.send({status: 404, message: "We cound't login"})
+                res.send({ status: 404, message: "We cound't login" })
             }
-        } else {
-            res.send({status: 404, message: "We cound't login"})
-        }
-    })
-    .catch(err => {
-        res.send({message: 'something went wrong!', err})
-    })
+        })
+        .catch(err => {
+            res.send({ message: 'something went wrong!', err })
+        })
 })
 
 app.post('/signup', (req, res) => {
@@ -33,7 +34,7 @@ app.post('/signup', (req, res) => {
             res.send(result)
         })
         .catch(err => {
-            res.send({message: err.detail})
+            res.send({ message: err.detail })
         })
 })
 
@@ -57,7 +58,7 @@ app.get('/collections/:id', (req, res) => {
             res.send(err)
         })
 })
-
+// سوال: خط پایین
 app.put('/collections/:id', upload.single('photo'), (req, res) => {
     const id = req.params.id
     req.body.id = id
@@ -104,5 +105,9 @@ app.put('/collections/:id/products/:id', upload.single('photo'), (req, res) => {
     req.body.id = id
     uploadPhoto(req, res, 'product')
 })
+
+
+
+
 
 module.exports = app;

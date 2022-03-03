@@ -131,9 +131,10 @@ module.exports = {
                     *
             `
             return db.one(sql, [name, photo_alt, description, id])
-            
+
         }
     },
 
-
 }
+
+
